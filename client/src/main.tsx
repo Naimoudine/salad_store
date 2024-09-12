@@ -7,6 +7,7 @@ import "./index.css";
 
 import App from "./App";
 import Home from "./pages/Home";
+import LogIn, { action as loginAction } from "./pages/LogIn";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,11 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "login",
+        element: <LogIn />,
+        action: loginAction,
       },
     ],
   },
