@@ -1,21 +1,51 @@
-create table user (
-  id int unsigned primary key auto_increment not null,
-  email varchar(255) not null unique,
-  password varchar(255) not null
+CREATE TABLE employee (
+  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
-create table item (
-  id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
-  user_id int unsigned not null,
-  foreign key(user_id) references user(id)
+CREATE TABLE ingredient (
+  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  category VARCHAR(255) NOT NULL,
+  price INT NOT NULL,
+  employee_id INT UNSIGNED NOT NULL,
+  FOREIGN KEY (employee_id) REFERENCES employee(id),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
-insert into user(id, email, password)
-values
+CREATE TABLE salad (
+  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  employee_id INT UNSIGNED NOT NULL,
+  FOREIGN KEY (employee_id) REFERENCES employee(id),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+CREATE TABLE compose (
+  ingredient_id INT UNSIGNED NOT NULL,
+  salad_id INT UNSIGNED NOT NULL,
+  FOREIGN KEY (salad_id) REFERENCES salad(id),
+  FOREIGN KEY (ingredient_id) REFERENCES ingredient(id)
+);
+
+CREATE TABLE order_table (
+  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  firstname VARCHAR(255) NOT NULL,
+  lastname VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  phone_number VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+CREATE TABLE belongs (
+  salad_id INT UNSIGNED NOT NULL,
+  order_id INT UNSIGNED NOT NULL,
+  FOREIGN KEY (salad_id) REFERENCES salad(id),
+  FOREIGN KEY (order_id) REFERENCES order_table(id)
+);
+
+INSERT INTO employee (id, email, password)
+VALUES
   (1, "jdoe@mail.com", "123456");
-
-insert into item(id, title, user_id)
-values
-  (1, "Stuff", 1),
-  (2, "Doodads", 1);

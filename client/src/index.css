@@ -1,0 +1,16 @@
+@tailwind base;
+@layer base {
+  button {
+    @apply px-4 py-2;
+  }
+}
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+  .nav-item {
+    @apply hover:text-primary;
+  }
+  .wrapper {
+    @apply px-8;
+  }
+}
