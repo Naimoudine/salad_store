@@ -1,4 +1,5 @@
 // Import Faker library for generating fake data
+// Import Faker library for generating fake data
 import { faker } from "@faker-js/faker";
 
 import type { Faker } from "@faker-js/faker";

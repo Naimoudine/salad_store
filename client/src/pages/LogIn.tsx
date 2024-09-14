@@ -1,12 +1,30 @@
-import { Form } from "react-router-dom";
+import { useEffect } from "react";
+import { Form, useActionData } from "react-router-dom";
 import logo from "../assets/images/salad-logo.png";
+import { useAuth } from "../hooks/useAuth";
 
-export const action = async ({ request }: { request: Request }) => {
+interface User {
+  id: number;
+  username: string;
+}
+
+interface ActionData {
+  user?: User;
+  error?: string;
+}
+
+export const action = async ({
+  request,
+}: {
+  request: Request;
+}): Promise<ActionData> => {
   const formData = await request.formData();
+
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
       method: "post",
       credentials: "include",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: formData.get("username"),
         password: formData.get("password"),
@@ -15,12 +33,26 @@ export const action = async ({ request }: { request: Request }) => {
     if (!response.ok) {
       throw new Error("unknow error while getting user");
     }
-  } catch (error: any) {
-    throw new Error(error.message);
+    const data = await response.json();
+    return { user: data };
+  } catch (error) {
+    if (error instanceof Error) {
+      // Re-throw the error with its original message if it's an instance of Error.
+      throw error;
+    }
   }
 };
 
 export default function LogIn() {
+  const user: User = useActionData();
+  const { setAuth } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      setAuth(user);
+    }
+  }, [user, setAuth]);
+
   return (
     <div className="flex flex-col items-center w-full h-full mt-16">
       <img className="w-auto h-56" src={logo} alt="logo" />
