@@ -9,6 +9,8 @@ import App from "./App";
 import { AuthProvider } from "./hooks/useAuth";
 import Home from "./pages/Home";
 import LogIn, { action as loginAction } from "./pages/LogIn";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Products, { loader as productsLoader } from "./pages/dashboard/Products";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,17 @@ const router = createBrowserRouter([
         path: "login",
         element: <LogIn />,
         action: loginAction,
+      },
+    ],
+  },
+  {
+    path: "/dashboard/",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "produits",
+        element: <Products />,
+        loader: productsLoader,
       },
     ],
   },

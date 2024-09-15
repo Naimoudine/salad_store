@@ -44,7 +44,7 @@ export const action = async ({
 };
 
 export default function LogIn() {
-  const user: User = useActionData();
+  const user = useActionData() as User;
   const { setAuth } = useAuth();
 
   useEffect(() => {

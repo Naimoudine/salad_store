@@ -11,6 +11,10 @@ import authActions from "./modules/auth/authAction";
 
 router.post("/login", authActions.login);
 
+import ingredientAction from "./modules/ingredients/ingredientAction";
+
+router.get("/api/ingredients", ingredientAction.browse);
+
 /* ************************************************************************* */
 
 export default router;
