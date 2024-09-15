@@ -1,6 +1,7 @@
+import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/20/solid";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/images/salad-logo.png";
-import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/20/solid";
+
 export default function Navbar() {
   return (
     <nav className="flex flex-col items-center justify-between h-full px-4 py-6 w-fit bg-primary">
