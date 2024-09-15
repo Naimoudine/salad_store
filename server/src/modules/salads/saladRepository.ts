@@ -3,7 +3,7 @@ import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 
 interface Salad {
-  id: number;
+  id?: number;
   name: string;
   url: string;
   sauce: string;
@@ -13,6 +13,22 @@ interface Salad {
 
 class SaladRepository {
   // The C of CRUD - Create operation
+
+  async create(salad: Salad) {
+    const [Result] = await databaseClient.query<Result>(
+      "insert into salad (name, url, sauce) values (?, ?, ?)",
+      [salad.name, salad.url, salad.sauce],
+    );
+    return Result.insertId;
+  }
+
+  async createCompose(ingredientId: number, saladId: number) {
+    const [Result] = await databaseClient.query<Result>(
+      "insert into compose (ingredient_id, salad_id) values (?, ?)",
+      [ingredientId, saladId],
+    );
+    return Result.insertId;
+  }
 
   // The Rs of CRUD - Read operations
 

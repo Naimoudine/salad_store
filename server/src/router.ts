@@ -25,6 +25,8 @@ import saladAction from "./modules/salads/saladAction";
 
 router.get("/api/salads", saladAction.browse);
 
+router.post("/api/salads", saladAction.add);
+
 /* ************************************************************************* */
 
 export default router;

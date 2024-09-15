@@ -40,6 +40,14 @@ class IngredientRepository {
     return rows;
   }
 
+  async readIdByName(name: string) {
+    const [rows] = await databaseClient.query<Rows>(
+      "select id from ingredient where name = ?",
+      [name],
+    );
+    return rows[0];
+  }
+
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing ingredient
 
