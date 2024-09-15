@@ -29,22 +29,28 @@ interface LoaderData {
 }
 
 export const loader = async () => {
-  const [ingredientsData, saladsData] = await Promise.all([
-    fetch(`${import.meta.env.VITE_API_URL}/api/ingredients`, {
-      credentials: "include",
-    }),
-    fetch(`${import.meta.env.VITE_API_URL}/api/salads`, {
-      credentials: "include",
-    }),
-  ]);
-  if (!ingredientsData.ok || !saladsData.ok) {
-    throw new Error("Uknown Error while getting data");
+  try {
+    const [ingredientsData, saladsData] = await Promise.all([
+      fetch(`${import.meta.env.VITE_API_URL}/api/ingredients`, {
+        credentials: "include",
+      }),
+      fetch(`${import.meta.env.VITE_API_URL}/api/salads`, {
+        credentials: "include",
+      }),
+    ]);
+    if (!ingredientsData.ok || !saladsData.ok) {
+      throw new Error("Uknown Error while getting data");
+    }
+    const [ingredients, salads] = await Promise.all([
+      ingredientsData.json(),
+      saladsData.json(),
+    ]);
+    return { ingredients, salads };
+  } catch (error) {
+    if (error instanceof Error) {
+      return error.message;
+    }
   }
-  const [ingredients, salads] = await Promise.all([
-    ingredientsData.json(),
-    saladsData.json(),
-  ]);
-  return { ingredients, salads };
 };
 
 export default function Products() {

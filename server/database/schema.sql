@@ -10,7 +10,7 @@ CREATE TABLE ingredient (
   name VARCHAR(255) NOT NULL,
   url VARCHAR(255) NOT NULL,
   category VARCHAR(255) NOT NULL,
-  price INT NOT NULL,
+  price varchar(5) NOT NULL,
   employee_id INT UNSIGNED,
   FOREIGN KEY (employee_id) REFERENCES employee(id),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()

@@ -16,6 +16,10 @@ import ingredientAction from "./modules/ingredients/ingredientAction";
 
 router.get("/api/ingredients", ingredientAction.browse);
 
+router.get("/api/ingredients/categories", ingredientAction.browseCategories);
+
+router.post("/api/ingredients", ingredientAction.add);
+
 // Salads route
 import saladAction from "./modules/salads/saladAction";
 

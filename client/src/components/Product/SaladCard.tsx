@@ -24,13 +24,9 @@ export default function SaladCard({ salad }: SaladCardProps) {
           background: `url('${salad?.url}') no-repeat center/cover`,
         }}
       />
-      <p>
-        <span className="font-semibold">Nom: </span>
-        {salad?.name}
-      </p>
-      <p>
-        <span className="font-semibold">Nom: </span> {salad?.ingredients},{" "}
-        {salad.sauce}
+      <p className="font-semibold">{salad?.name}</p>
+      <p className="font-semibold text-zinc-400">
+        {salad?.ingredients}, {salad.sauce}
       </p>
       <p>
         {" "}

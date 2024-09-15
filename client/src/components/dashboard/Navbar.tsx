@@ -4,24 +4,30 @@ import logo from "../../assets/images/salad-logo.png";
 
 export default function Navbar() {
   return (
-    <nav className="flex flex-col items-center justify-between h-full px-4 py-6 w-fit bg-primary">
+    <nav className="flex flex-col items-center justify-between w-full h-full px-4 py-6 w-fit bg-primary">
       <div>
         <Link to="/">
           <img className="h-24" src={logo} alt="logo" />
         </Link>
         <ul className="flex flex-col gap-8 mt-16 text-sm">
           <li>
-            <NavLink className="dashboard-nav-item" to="">
+            <NavLink className="dashboard-nav-item" to="/dashboard/produits">
               Nos produits
             </NavLink>
           </li>
           <li>
-            <NavLink className="dashboard-nav-item" to="">
+            <NavLink
+              className="dashboard-nav-item"
+              to="/dashboard/ajout-salade"
+            >
               Ajouter une salade
             </NavLink>
           </li>
           <li>
-            <NavLink className="dashboard-nav-item" to="">
+            <NavLink
+              className="dashboard-nav-item"
+              to="/dashboard/ajout-ingredient"
+            >
               Ajouter un ingrédient
             </NavLink>
           </li>

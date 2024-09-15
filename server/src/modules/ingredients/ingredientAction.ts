@@ -17,8 +17,32 @@ const browse: RequestHandler = async (req, res, next) => {
   }
 };
 
+const browseCategories: RequestHandler = async (req, res, next) => {
+  try {
+    const categories = await ingredientRepository.readAllCategories();
+    res.json(categories);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // The R of BREAD - Read operation
 
 // The A of BREAD - Add (Create) operation
 
-export default { browse };
+const add: RequestHandler = async (req, res, next) => {
+  try {
+    const newIngredient = {
+      name: req.body.name,
+      url: req.body.url,
+      price: req.body.price,
+      category: req.body.category,
+    };
+    const insertedId = await ingredientRepository.create(newIngredient);
+    res.status(201).json(insertedId);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, browseCategories, add };
