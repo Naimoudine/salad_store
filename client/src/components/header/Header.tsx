@@ -9,11 +9,7 @@ export default function Header({ children }: HeaderProps) {
   const { pathname } = useLocation();
   return (
     <header
-      className={
-        pathname === "/"
-          ? "absolute w-full sm:backdrop-blur-sm"
-          : "absolute w-full"
-      }
+      className={pathname === "/" ? "absolute w-full sm:backdrop-blur-sm" : ""}
     >
       {children}
     </header>

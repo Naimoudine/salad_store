@@ -6,7 +6,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.css";
 
 import App from "./App";
+import { AuthProvider } from "./hooks/useAuth";
 import Home from "./pages/Home";
+import LogIn, { action as loginAction } from "./pages/LogIn";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,11 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "login",
+        element: <LogIn />,
+        action: loginAction,
       },
     ],
   },
@@ -28,7 +35,10 @@ if (rootElement != null) {
 
   root.render(
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+      ,
     </React.StrictMode>,
   );
 }

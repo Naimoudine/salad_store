@@ -1,6 +1,6 @@
 CREATE TABLE employee (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE,
+  username VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
@@ -46,6 +46,6 @@ CREATE TABLE belongs (
   FOREIGN KEY (order_id) REFERENCES order_table(id)
 );
 
-INSERT INTO employee (id, email, password)
+INSERT INTO employee (id, username, password)
 VALUES
-  (1, "jdoe@mail.com", "123456");
+  (1, "saladUsername", "$argon2i$v=19$m=16,t=2,p=1$a3kxRk1iM1dPQnNYUVZLTw$M7zmoRZ6Gk7vzAd9W2oE1w");

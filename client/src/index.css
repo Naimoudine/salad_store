@@ -1,7 +1,19 @@
 @tailwind base;
 @layer base {
+  body {
+    @apply w-screen h-screen;
+  }
+
+  #root {
+    @apply w-full h-full;
+  }
+
   button {
-    @apply px-4 py-2;
+    @apply px-4 py-2 rounded-lg;
+  }
+
+  form > input {
+    @apply px-4 py-2 border-2 rounded-lg border-zinc-500;
   }
 }
 @tailwind components;

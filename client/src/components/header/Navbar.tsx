@@ -36,7 +36,7 @@ export default function Navbar() {
         </li>
       </ul>
       <button
-        className="hidden rounded-lg sm:block bg-secondary"
+        className="hidden sm:block bg-secondary"
         type="button"
         aria-label="open cart"
       >
