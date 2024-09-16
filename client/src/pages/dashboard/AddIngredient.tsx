@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Form, redirect, useLoaderData } from "react-router-dom";
+import { Form, redirect, useLoaderData, useNavigation } from "react-router-dom";
 
 interface Category {
   category: string;
@@ -27,6 +27,7 @@ export const loader = async () => {
 
 export const action = async ({ request }: { request: Request }) => {
   const formData = await request.formData();
+  const userId = JSON.parse(localStorage.getItem("user") || "{}");
   try {
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/ingredients`,
@@ -38,7 +39,7 @@ export const action = async ({ request }: { request: Request }) => {
           url: formData.get("url"),
           price: formData.get("price"),
           category: formData.get("category"),
-          employee_id: undefined,
+          employeeId: userId.id,
         }),
         credentials: "include",
       },
@@ -58,6 +59,9 @@ export default function AddIngredient() {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const data = useLoaderData() as Category[];
+
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
 
   useEffect(() => {
     const uniqueArray: Category[] = Object.values(
@@ -105,7 +109,11 @@ export default function AddIngredient() {
             <option key={category.category}>{category.category}</option>
           ))}
         </select>
-        <button className="font-semibold text-white bg-secondary" type="submit">
+        <button
+          className="font-semibold text-white bg-secondary disabled:bg-gray-400"
+          type="submit"
+          disabled={isSubmitting}
+        >
           Ajouter
         </button>
       </Form>

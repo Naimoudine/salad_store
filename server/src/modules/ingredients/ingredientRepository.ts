@@ -8,7 +8,7 @@ interface Ingredient {
   url: string;
   category: string;
   price: string;
-  employee_id?: number;
+  employeeId?: number;
   created_at?: string;
 }
 
@@ -17,8 +17,14 @@ class IngredientRepository {
 
   async create(ingredient: Ingredient) {
     const [result] = await databaseClient.query<Result>(
-      "insert into ingredient (name, url, price, category) values (?, ?, ?, ?)",
-      [ingredient.name, ingredient.url, ingredient.price, ingredient.category],
+      "insert into ingredient (name, url, price, category, employee_id) values (?, ?, ?, ?, ?)",
+      [
+        ingredient.name,
+        ingredient.url,
+        ingredient.price,
+        ingredient.category,
+        ingredient.employeeId,
+      ],
     );
     return result.insertId;
   }

@@ -1,4 +1,4 @@
-import { Form, redirect, useLoaderData } from "react-router-dom";
+import { Form, redirect, useLoaderData, useNavigation } from "react-router-dom";
 
 interface Ingredient {
   id: number;
@@ -32,6 +32,8 @@ export const loader = async () => {
 
 export const action = async ({ request }: { request: Request }) => {
   const formData = await request.formData();
+  const userId = JSON.parse(localStorage.getItem("user") || "{}");
+
   try {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/salads`, {
       method: "post",
@@ -46,6 +48,7 @@ export const action = async ({ request }: { request: Request }) => {
           formData.get("fromage"),
           formData.get("topping"),
         ],
+        employeeId: userId.id,
       }),
       credentials: "include",
     });
@@ -62,6 +65,9 @@ export const action = async ({ request }: { request: Request }) => {
 
 export default function AddSalad() {
   const ingredients = useLoaderData() as Ingredient[];
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   return (
     <div className="page">
       <h1 className="title">Ajouter une salade</h1>
@@ -149,7 +155,11 @@ export default function AddSalad() {
           id="sauce"
           placeholder="Entrer une sauce si il y en a une"
         />
-        <button className="font-semibold text-white bg-secondary" type="submit">
+        <button
+          className="font-semibold text-white bg-secondary disable:bg-gray-400"
+          type="submit"
+          disabled={isSubmitting}
+        >
           Ajouter
         </button>
       </Form>

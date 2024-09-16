@@ -37,7 +37,13 @@ const add: RequestHandler = async (req, res, next) => {
       url: req.body.url,
       price: req.body.price,
       category: req.body.category,
+      employeeId: req.body.employeeId,
     };
+    if (!newIngredient || !newIngredient.name || !newIngredient.category) {
+      res.status(422).json({
+        message: "Le nom de l'ingrédient et sa catégorie sont obligatoire",
+      });
+    }
     const insertedId = await ingredientRepository.create(newIngredient);
     res.status(201).json(insertedId);
   } catch (err) {

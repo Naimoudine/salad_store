@@ -28,6 +28,9 @@ const add: RequestHandler = async (req, res, next) => {
       url: req.body.url,
       sauce: req.body.sauce,
     };
+    if (!newSalad || !newSalad.name) {
+      res.status(422).json({ message: "le nom de la salade est obligatoire." });
+    }
     const saladId = await saladRepository.create(newSalad);
     if (saladId) {
       for (const ingredient of req.body.ingredients) {
