@@ -1,5 +1,10 @@
 import { useEffect } from "react";
-import { Form, useActionData } from "react-router-dom";
+import {
+  Form,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import logo from "../assets/images/salad-logo.png";
 import { useAuth } from "../hooks/useAuth";
 
@@ -34,24 +39,28 @@ export const action = async ({
       throw new Error("unknow error while getting user");
     }
     const data = await response.json();
+    localStorage.setItem("user", JSON.stringify(data));
     return { user: data };
   } catch (error) {
     if (error instanceof Error) {
-      // Re-throw the error with its original message if it's an instance of Error.
       throw error;
     }
   }
 };
 
 export default function LogIn() {
-  const user: User = useActionData();
+  const user = useActionData() as User;
   const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
 
   useEffect(() => {
     if (user) {
       setAuth(user);
+      navigate("/dashboard");
     }
-  }, [user, setAuth]);
+  }, [user, setAuth, navigate]);
 
   return (
     <div className="flex flex-col items-center w-full h-full mt-16">
@@ -62,16 +71,19 @@ export default function LogIn() {
           name="username"
           id="username"
           placeholder="Enter your username"
+          required
         />
         <input
           type="password"
           name="password"
           id="password"
           placeholder="Enter your password"
+          required
         />
         <button
-          className="font-semibold text-white bg-secondary hover:bg-secondary/70"
+          className="font-semibold text-white bg-secondary hover:bg-secondary/70 disabled:bg-gray-500"
           type="submit"
+          disabled={isSubmitting}
         >
           Log In
         </button>

@@ -5,7 +5,7 @@
   }
 
   #root {
-    @apply w-full h-full;
+    @apply w-full h-full overflow-hidden;
   }
 
   button {
@@ -19,10 +19,27 @@
 @tailwind components;
 @tailwind utilities;
 @layer utilities {
+  .wrapper {
+    @apply px-8;
+  }
+
+  .page {
+    @apply mx-8 my-16;
+  }
+  
   .nav-item {
     @apply hover:text-primary;
   }
-  .wrapper {
-    @apply px-8;
+
+  .dashboard-nav-item {
+    @apply font-semibold hover:text-white;
+  }
+
+  .title {
+    @apply text-2xl font-bold md:text-4xl; 
+  }
+
+  .subtitle {
+    @apply text-xl font-bold md:text-2xl;
   }
 }
