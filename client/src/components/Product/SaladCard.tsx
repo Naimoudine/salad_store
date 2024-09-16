@@ -4,22 +4,23 @@ interface SaladCardProps {
   salad: Salad;
 }
 
-export default function SaladCard({ salad }: SaladCardProps) {
-  const calculateFinalPrice = () => {
-    let total = 0;
+export const calculateFinalPrice = (salad: Salad) => {
+  let total = 0;
 
-    if (salad.ingredient_prices) {
-      const arrPrices = salad.ingredient_prices.split(",");
-      for (const price of arrPrices) {
-        total += Number(price);
-      }
+  if (salad.ingredient_prices) {
+    const arrPrices = salad.ingredient_prices.split(",");
+    for (const price of arrPrices) {
+      total += Number(price);
     }
-    return total;
-  };
+  }
+  return total;
+};
+
+export default function SaladCard({ salad }: SaladCardProps) {
   return (
-    <article className="flex flex-col w-56 gap-2 p-4 rounded-lg shadow-lg h-fit">
+    <article className="flex flex-col w-56 gap-2 p-4 rounded-lg shadow-xl h-fit">
       <div
-        className="w-full min-h-24"
+        className="w-full rounded-lg min-h-24"
         style={{
           background: `url('${salad?.url}') no-repeat center/cover`,
         }}
@@ -30,7 +31,10 @@ export default function SaladCard({ salad }: SaladCardProps) {
       </p>
       <p>
         {" "}
-        <span className="font-semibold">Prix: {calculateFinalPrice()} </span>€
+        <span className="font-semibold">
+          Prix: {calculateFinalPrice(salad)}{" "}
+        </span>
+        €
       </p>
     </article>
   );

@@ -9,6 +9,7 @@ import App from "./App";
 import { AuthProvider } from "./hooks/useAuth";
 import Home, { loader as homeLoader } from "./pages/Home";
 import LogIn, { action as loginAction } from "./pages/LogIn";
+import Salads, { loader as saladsLoader } from "./pages/Salads";
 import AddIngredient, {
   loader as AddIngredientLoader,
   action as AddIngredientAction,
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
         loader: homeLoader,
+      },
+      {
+        path: "/nos-salades",
+        element: <Salads />,
+        loader: saladsLoader,
       },
       {
         path: "login",
@@ -72,7 +78,6 @@ if (rootElement != null) {
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
-      ,
     </React.StrictMode>,
   );
 }
