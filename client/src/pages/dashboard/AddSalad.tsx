@@ -78,6 +78,7 @@ export default function AddSalad() {
           name="name"
           id="name"
           placeholder="Entrer le nom de la salade"
+          required
         />
         <input
           className="text-lg"
@@ -85,6 +86,7 @@ export default function AddSalad() {
           name="url"
           id="url"
           placeholder="Entrer l'url de l'image"
+          required
         />
         <div className="flex flex-wrap items-center justify-start gap-8">
           <section>
@@ -92,6 +94,7 @@ export default function AddSalad() {
             <select
               className="px-4 py-2 mt-4 border rounded-lg border-zinc-400"
               name="base"
+              required
             >
               {ingredients
                 .filter((ingredient) => ingredient.category === "base")
@@ -107,6 +110,7 @@ export default function AddSalad() {
             <select
               className="px-4 py-2 mt-4 border rounded-lg border-zinc-400"
               name="proteine"
+              required
             >
               {ingredients
                 .filter((ingredient) => ingredient.category === "protéine")
@@ -122,6 +126,7 @@ export default function AddSalad() {
             <select
               className="px-4 py-2 mt-4 border rounded-lg border-zinc-400"
               name="fromage"
+              required
             >
               {ingredients
                 .filter((ingredient) => ingredient.category === "fromage")
@@ -137,6 +142,7 @@ export default function AddSalad() {
             <select
               className="px-4 py-2 mt-4 border rounded-lg border-zinc-400"
               name="topping"
+              required
             >
               {ingredients
                 .filter((ingredient) => ingredient.category === "topping")
@@ -154,6 +160,7 @@ export default function AddSalad() {
           name="sauce"
           id="sauce"
           placeholder="Entrer une sauce si il y en a une"
+          required
         />
         <button
           className="font-semibold text-white bg-secondary disable:bg-gray-400"

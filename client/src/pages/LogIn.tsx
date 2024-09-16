@@ -71,12 +71,14 @@ export default function LogIn() {
           name="username"
           id="username"
           placeholder="Enter your username"
+          required
         />
         <input
           type="password"
           name="password"
           id="password"
           placeholder="Enter your password"
+          required
         />
         <button
           className="font-semibold text-white bg-secondary hover:bg-secondary/70 disabled:bg-gray-500"

@@ -84,6 +84,7 @@ export default function AddIngredient() {
           name="name"
           id="name"
           placeholder="Entrer le nom de l'ingrédient"
+          required
         />
         <input
           className="text-lg"
@@ -91,6 +92,7 @@ export default function AddIngredient() {
           name="url"
           id="url"
           placeholder="Entrer l'url de l'image"
+          required
         />
         <input
           className="text-lg"
@@ -98,11 +100,13 @@ export default function AddIngredient() {
           name="price"
           id="price"
           placeholder="Entrer le prix"
+          required
         />
         <select
           className="px-4 py-2 border rounded-lg w-fit border-zinc-400"
           name="category"
           id="category"
+          required
         >
           <option value="">category</option>
           {categories.map((category) => (
