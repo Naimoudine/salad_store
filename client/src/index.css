@@ -24,7 +24,7 @@
   }
 
   .page {
-    @apply mx-8 my-8 md:my-16;
+    @apply mx-8 my-8 md:my-16 max-w-[1400px] mx-auto mx-8;
   }
   
   .nav-item {
