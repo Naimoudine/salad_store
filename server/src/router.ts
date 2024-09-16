@@ -7,11 +7,25 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Define item-related routes
-import itemActions from "./modules/item/itemActions";
+import authActions from "./modules/auth/authAction";
 
-router.get("/api/items", itemActions.browse);
-router.get("/api/items/:id", itemActions.read);
-router.post("/api/items", itemActions.add);
+router.post("/login", authActions.login);
+
+// Ingredients route
+import ingredientAction from "./modules/ingredients/ingredientAction";
+
+router.get("/api/ingredients", ingredientAction.browse);
+
+router.get("/api/ingredients/categories", ingredientAction.browseCategories);
+
+router.post("/api/ingredients", ingredientAction.add);
+
+// Salads route
+import saladAction from "./modules/salads/saladAction";
+
+router.get("/api/salads", saladAction.browse);
+
+router.post("/api/salads", saladAction.add);
 
 /* ************************************************************************* */
 
