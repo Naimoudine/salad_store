@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Form, redirect, useLoaderData, useNavigation } from "react-router-dom";
 
-interface Category {
+export interface Category {
   category: string;
 }
 

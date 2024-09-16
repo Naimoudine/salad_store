@@ -7,7 +7,7 @@ import "./index.css";
 
 import App from "./App";
 import { AuthProvider } from "./hooks/useAuth";
-import Home from "./pages/Home";
+import Home, { loader as homeLoader } from "./pages/Home";
 import LogIn, { action as loginAction } from "./pages/LogIn";
 import AddIngredient, {
   loader as AddIngredientLoader,
@@ -28,6 +28,7 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+        loader: homeLoader,
       },
       {
         path: "login",
