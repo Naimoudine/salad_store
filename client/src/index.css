@@ -5,7 +5,7 @@
   }
 
   #root {
-    @apply w-full h-full overflow-hidden;
+    @apply w-full h-full;
   }
 
   button {
