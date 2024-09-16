@@ -20,17 +20,17 @@ export default function Navbar() {
         }
       >
         <li>
-          <NavLink className="nav-item" to="/custom">
+          <NavLink className="nav-item" to="/personnaliser">
             Personnalise ta salade
           </NavLink>
         </li>
         <li>
-          <NavLink className="nav-item" to="/salades">
+          <NavLink className="nav-item" to="/nos-salades">
             Nos salades
           </NavLink>
         </li>
         <li>
-          <NavLink className="nav-item" to="/about">
+          <NavLink className="nav-item" to="/a-propos">
             Qui sommes nous ?
           </NavLink>
         </li>

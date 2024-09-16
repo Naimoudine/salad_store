@@ -63,7 +63,7 @@ export default function LogIn() {
   }, [user, setAuth, navigate]);
 
   return (
-    <div className="flex flex-col items-center w-full h-full mt-16">
+    <div className="flex flex-col items-center pb-16">
       <img className="w-auto h-56" src={logo} alt="logo" />
       <Form method="post" className="flex flex-col gap-8">
         <input

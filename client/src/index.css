@@ -1,11 +1,11 @@
 @tailwind base;
 @layer base {
   body {
-    @apply w-screen h-screen;
+    @apply w-screen h-screen bg-[#f9f9f9];
   }
 
   #root {
-    @apply w-full h-full;
+    @apply w-full h-full overflow-x-hidden;
   }
 
   button {
@@ -24,7 +24,7 @@
   }
 
   .page {
-    @apply mx-8 my-16;
+    @apply mx-8 my-8 md:my-16;
   }
   
   .nav-item {
