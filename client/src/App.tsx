@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import Navbar from "./components/header/Navbar";
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <main className="flex-grow">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 }

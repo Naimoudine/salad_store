@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import background from "../assets/images/landing-bg.avif";
-import type { Ingredient } from "./dashboard/Products";
-import { useEffect, useState } from "react";
-import type { Category } from "./dashboard/AddIngredient";
 import Tag from "../components/Tag";
+import type { Category } from "./dashboard/AddIngredient";
+import type { Ingredient } from "./dashboard/Products";
 
 export const loader = async () => {
   try {
@@ -24,7 +24,7 @@ export const loader = async () => {
 
 export default function Home() {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [filtred, setFiltered] = useState<Ingredient[]>([]);
+  const [filtered, setFiltered] = useState<Ingredient[]>([]);
   const ingredients = useLoaderData() as Ingredient[];
 
   useEffect(() => {
@@ -42,10 +42,10 @@ export default function Home() {
     setFiltered(
       ingredients.filter((ingredient) => ingredient.category === "base"),
     );
-  }, []);
+  }, [ingredients]);
 
   return (
-    <div className="pb-16">
+    <div className="pb-20">
       <div
         className="w-full h-[45dvh] md:h-[65dvh]"
         style={{
@@ -59,20 +59,26 @@ export default function Home() {
           Découvrez + de 120 combinaisons possibles pour créer la salade qui
           vous correspond, grâce à notre large choix d’ingrédients.
         </h1>
-        <div className="flex flex-wrap items-center justify-start gap-8 mt-8">
+        <div className="flex flex-wrap items-center justify-start gap-4 mt-8 md:gap-8">
           {categories.map((category) => (
-            <Tag key={category.category}>{category.category}</Tag>
+            <Tag
+              key={category.category}
+              ingredients={ingredients}
+              setFiltered={setFiltered}
+            >
+              {category.category}
+            </Tag>
           ))}
         </div>
-        <div className="flex flex-wrap items-center gap-8 mt-8">
-          {filtred.map((ingredient) => (
+        <div className="flex flex-wrap items-center gap-16 mt-8">
+          {filtered.map((ingredient) => (
             <div
-              className="w-56 h-56 p-6 rounded-lg shadow-xl"
+              className="flex items-center justify-center w-full h-56 p-6 rounded-lg shadow-xl sm:w-56"
               key={ingredient.id}
               title={ingredient.name}
             >
               <img
-                className="object-contain aspect-square"
+                className="w-40 h-40 sm:object-contain sm:aspect-square"
                 src={ingredient.url}
                 alt=""
               />
