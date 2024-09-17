@@ -47,7 +47,7 @@ export const action = async ({ request }: { request: Request }) => {
     if (response.status !== 201) {
       throw new Error("unknown error while creating ingredient");
     }
-    return redirect("/dashboard/produits");
+    return redirect("/dashboard");
   } catch (error) {
     if (error instanceof Error) {
       return error.message;

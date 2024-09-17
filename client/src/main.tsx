@@ -7,8 +7,11 @@ import "./index.css";
 
 import App from "./App";
 import { AuthProvider } from "./hooks/useAuth";
+import ConfirmOrder from "./pages/ConfirmOrder";
+import Custom, { loader as customLoader } from "./pages/Custom";
 import Home, { loader as homeLoader } from "./pages/Home";
 import LogIn, { action as loginAction } from "./pages/LogIn";
+import Order from "./pages/Order";
 import Salads, { loader as saladsLoader } from "./pages/Salads";
 import AddIngredient, {
   loader as AddIngredientLoader,
@@ -20,8 +23,6 @@ import AddSalad, {
 } from "./pages/dashboard/AddSalad";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Products, { loader as productsLoader } from "./pages/dashboard/Products";
-import Order from "./pages/Order";
-import ConfirmOrder from "./pages/ConfirmOrder";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,11 @@ const router = createBrowserRouter([
       {
         path: "commande-confirmee",
         element: <ConfirmOrder />,
+      },
+      {
+        path: "personnaliser",
+        element: <Custom />,
+        loader: customLoader,
       },
     ],
   },

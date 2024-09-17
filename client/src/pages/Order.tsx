@@ -1,7 +1,7 @@
-import { useCartStore } from "../store";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router-dom";
+import { useCartStore } from "../store";
 
 export default function Order() {
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -10,6 +10,9 @@ export default function Order() {
   const removeSalad = useCartStore((s) => s.removeSalad);
 
   const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === "submitting";
 
   useEffect(() => {
     const newTotal = salads.reduce((acc, salad) => acc + salad.totalPrice, 0);
@@ -46,7 +49,6 @@ export default function Order() {
       if (response.status !== 201) {
         throw new Error("Error while ordering");
       }
-      console.log("c'est good ");
       navigate("/commande-confirmee");
     } catch (error) {
       if (error instanceof Error) {
@@ -64,7 +66,7 @@ export default function Order() {
             {salads.map((salad) => (
               <article
                 className="flex items-center justify-between p-4 bg-gray-200"
-                key={salad.id}
+                key={salad.name}
               >
                 <img
                   className="w-16 h-16 rounded-md"
@@ -154,7 +156,11 @@ export default function Order() {
               required
             />
           </label>
-          <button className="text-white bg-secondary" type="submit">
+          <button
+            className="text-white bg-secondary disabled:bg-gray-400"
+            type="submit"
+            disabled={isSubmitting}
+          >
             Commander
           </button>
         </form>

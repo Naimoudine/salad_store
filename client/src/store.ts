@@ -5,6 +5,7 @@ type CartStore = {
   salads: Salad[];
   addSalad: (salad: Salad) => void;
   removeSalad: (salad: Salad) => void;
+  clean: () => void;
 };
 
 export const useCartStore = create<CartStore>((set) => ({
@@ -18,5 +19,8 @@ export const useCartStore = create<CartStore>((set) => ({
     set((state) => ({
       salads: state.salads.filter((el) => el.id !== salad.id),
     }));
+  },
+  clean: () => {
+    set(() => ({ salads: [] }));
   },
 }));

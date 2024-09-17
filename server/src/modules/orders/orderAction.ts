@@ -1,8 +1,8 @@
 import type { RequestHandler } from "express";
 
 // Import access to data
-import orderRepository from "./orderRepository";
 import saladRepository from "../salads/saladRepository";
+import orderRepository from "./orderRepository";
 
 // The B of BREAD - Browse (Read All) operation
 const browse: RequestHandler = async (req, res, next) => {
@@ -29,7 +29,7 @@ const add: RequestHandler = async (req, res, next) => {
     for (const salad of salads) {
       const exists = await saladRepository.readByName(salad.name);
       if (!exists) {
-        saladId = await saladRepository.create(exists);
+        saladId = await saladRepository.create(salad);
       } else {
         saladId = exists.id;
       }

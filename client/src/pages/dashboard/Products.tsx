@@ -13,14 +13,14 @@ export interface Ingredient {
 }
 
 export interface Salad {
-  id: number;
+  id?: number;
   name: string;
   url: string;
-  sauce: string;
+  sauce?: string;
   totalPrice: number;
-  ingredients: string;
+  ingredients: string | Ingredient[];
   user_id?: number;
-  created_at: string;
+  created_at?: string;
 }
 
 interface LoaderData {
