@@ -5,7 +5,11 @@ import {
 import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../../assets/images/salad-logo.png";
 
-export default function Navbar() {
+interface NavbarProps {
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Navbar({ setOpenModal }: NavbarProps) {
   const { pathname } = useLocation();
   return (
     <nav className="flex items-center justify-between px-4 py-2 ">
@@ -21,7 +25,7 @@ export default function Navbar() {
       >
         <li>
           <NavLink className="nav-item" to="/personnaliser">
-            Personnalise ta salade
+            Personnalises ta salade
           </NavLink>
         </li>
         <li>
@@ -42,7 +46,12 @@ export default function Navbar() {
       >
         <ShoppingCartIcon className="text-white size-4" />
       </button>
-      <button className="sm:hidden" type="button" aria-label="open menu">
+      <button
+        className="sm:hidden"
+        type="button"
+        aria-label="open menu"
+        onClick={() => setOpenModal(true)}
+      >
         <Bars3BottomRightIcon
           className={
             pathname === "/" ? "size-6 text-white" : "size-6 text-black"
