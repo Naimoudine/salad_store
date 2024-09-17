@@ -17,7 +17,7 @@ export interface Salad {
   name: string;
   url: string;
   sauce: string;
-  ingredient_prices: string;
+  totalPrice: number;
   ingredients: string;
   user_id?: number;
   created_at: string;

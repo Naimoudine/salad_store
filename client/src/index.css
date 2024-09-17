@@ -42,4 +42,8 @@
   .subtitle {
     @apply text-xl font-bold md:text-2xl;
   }
+
+  .input-form {
+    @apply px-4 py-2 border-2 rounded-lg border-primary;
+  }
 }

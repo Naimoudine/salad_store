@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
-import { calculateFinalPrice } from "../components/Product/SaladCard";
 import type { Salad } from "./dashboard/Products";
+import { useCartStore } from "../store";
 
 export const loader = async () => {
   try {
@@ -19,6 +19,8 @@ export const loader = async () => {
 
 export default function Salads() {
   const salads = useLoaderData() as Salad[];
+  const saladsCart = useCartStore((s) => s.salads);
+  const addSalad = useCartStore((s) => s.addSalad);
   return (
     <div className="page">
       <h1 className="title">Nos Salades</h1>
@@ -38,12 +40,13 @@ export default function Salads() {
             <p className="font-semibold text-zinc-400">
               {salad?.ingredients}, {salad.sauce}
             </p>
-            <p className="font-semibold">{calculateFinalPrice(salad)} €</p>
+            <p className="font-semibold">{salad?.totalPrice} €</p>
             <button
               className="text-white bg-secondary hover:bg-secondary/70"
               type="button"
+              onClick={() => addSalad(salad)}
             >
-              order
+              Commander
             </button>
           </article>
         ))}

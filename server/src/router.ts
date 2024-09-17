@@ -27,6 +27,12 @@ router.get("/api/salads", saladAction.browse);
 
 router.post("/api/salads", saladAction.add);
 
+// Order route
+
+import orderAction from "./modules/orders/orderAction";
+
+router.post("/api/order", orderAction.add);
+
 /* ************************************************************************* */
 
 export default router;

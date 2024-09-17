@@ -20,6 +20,8 @@ import AddSalad, {
 } from "./pages/dashboard/AddSalad";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Products, { loader as productsLoader } from "./pages/dashboard/Products";
+import Order from "./pages/Order";
+import ConfirmOrder from "./pages/ConfirmOrder";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
         path: "login",
         element: <LogIn />,
         action: loginAction,
+      },
+      {
+        path: "commande",
+        element: <Order />,
+      },
+      {
+        path: "commande-confirmee",
+        element: <ConfirmOrder />,
       },
     ],
   },

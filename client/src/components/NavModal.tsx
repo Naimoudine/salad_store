@@ -1,5 +1,6 @@
 import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useCartStore } from "../store";
 
 interface NavModalProps {
   openModal: boolean;
@@ -7,6 +8,8 @@ interface NavModalProps {
 }
 
 export default function NavModal({ openModal, setOpenModal }: NavModalProps) {
+  const salads = useCartStore((s) => s.salads);
+  const navigate = useNavigate();
   return (
     <div
       className={
@@ -54,10 +57,12 @@ export default function NavModal({ openModal, setOpenModal }: NavModalProps) {
           </li>
           <li>
             <button
-              className="flex items-center justify-center w-full bg-secondary"
+              className="flex items-center justify-center w-full gap-4 font-semibold text-white bg-secondary hover:bg-secondary/70"
               type="button"
+              onClick={() => navigate("/commande")}
             >
               <ShoppingCartIcon className="text-white size-4" />
+              {salads.length}
             </button>
           </li>
         </ul>

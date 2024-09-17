@@ -2,7 +2,7 @@ import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
 
-interface Salad {
+export interface Salad {
   id?: number;
   name: string;
   url: string;
@@ -35,11 +35,19 @@ class SaladRepository {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all Salads from the "Salad" table
     const [rows] = await databaseClient.query<Rows>(
-      "select s.*, GROUP_CONCAT(i.name SEPARATOR ', ') as ingredients,  GROUP_CONCAT(i.price SEPARATOR ', ') as ingredient_prices from salad as s join compose c on s.id = c.salad_id join ingredient i on i.id = c.ingredient_id group by s.id",
+      "select s.*, GROUP_CONCAT(i.name SEPARATOR ', ') as ingredients, SUM(i.price) as totalPrice from salad as s join compose c on s.id = c.salad_id join ingredient i on i.id = c.ingredient_id group by s.id",
     );
 
     // Return the array of Salads
     return rows as Salad[];
+  }
+
+  async readByName(name: string) {
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from salad where name = ?",
+      [name],
+    );
+    return rows[0];
   }
 
   // The U of CRUD - Update operation

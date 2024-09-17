@@ -2,8 +2,9 @@ import {
   Bars3BottomRightIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/20/solid";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/salad-logo.png";
+import { useCartStore } from "../../store";
 
 interface NavbarProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,6 +12,8 @@ interface NavbarProps {
 
 export default function Navbar({ setOpenModal }: NavbarProps) {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const salads = useCartStore((s) => s.salads);
   return (
     <nav className="flex items-center justify-between px-4 py-2 ">
       <Link to="/">
@@ -40,11 +43,13 @@ export default function Navbar({ setOpenModal }: NavbarProps) {
         </li>
       </ul>
       <button
-        className="hidden sm:block bg-secondary"
+        className="items-center justify-center hidden gap-4 font-semibold text-white sm:flex bg-secondary hover:bg-secondary/70"
         type="button"
         aria-label="open cart"
+        onClick={() => navigate("/commande")}
       >
         <ShoppingCartIcon className="text-white size-4" />
+        {salads.length}
       </button>
       <button
         className="sm:hidden"
